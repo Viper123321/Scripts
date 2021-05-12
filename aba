@@ -1,0 +1,119 @@
+repeat wait() until game:IsLoaded()
+local games = game:HttpGet("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public") -- send request to API
+local json = game:GetService("HttpService"):JSONDecode(games)
+local MinPlayerCount = 7
+local Players = game.Players:GetPlayers()
+
+local function AbaScript()
+if game.PlaceId == 1458767429 then
+  warn("V's ABA AFK")
+  game:GetService("ReplicatedStorage").Loaded:FireServer()
+  wait(6.5)
+  local plr = game.Players.LocalPlayer
+  local toggled = true
+  wait(1.2)
+game.StarterGui:SetCore("SendNotification", {
+Title = "ABA Macro"; -- the title (ofc)
+Text = "On; Press X to toggle."; -- what the text says (ofc)
+Duration = 5; -- how long the notification should in secounds
+})
+  warn("auto on, x to toggle")
+
+  game.Players.LocalPlayer:GetMouse().KeyDown:Connect(function(key)
+    if key == "x" then
+      toggled = not toggled
+      if toggled then
+          game.StarterGui:SetCore("SendNotification", {
+Title = "ABA Macro"; -- the title (ofc)
+Text = "On"; -- what the text says (ofc)
+Duration = 5; -- how long the notification should in secounds
+})
+else
+    game.StarterGui:SetCore("SendNotification", {
+Title = "ABA Macro"; -- the title (ofc)
+Text = "Off"; -- what the text says (ofc)
+Duration = 5; -- how long the notification should in secounds
+})
+end
+      warn('Auto: ', toggled)
+    end
+  end)
+
+  while wait() do
+    if toggled then
+    keypress(0x47)
+    wait(.1)
+    keyrelease(0x47)
+    wait(.1)     
+        for var=1,7 do
+            game:GetService("Players").LocalPlayer.Backpack.ServerTraits.Input:FireServer("m1", {["air"] = false, ["mousehit"] = CFrame.new(Vector3.new(2620.4252929688, -127.69131469727, -201.87484741211), Vector3.new(0.04540978372097, -0.40497255325317, -0.91320049762726))})
+            wait(.25)
+            end
+wait(.1)
+    keypress(0x31)
+    wait(.1)
+    keyrelease(0x31)
+    wait(.1)
+    keypress(0x32)
+    wait(.1)
+    keyrelease(0x32)
+    wait(.1)
+    keypress(0x33)
+    wait(.1)
+    keyrelease(0x33)
+    wait(.1)
+    keypress(0x34)
+    wait(.1)
+    keyrelease(0x34)
+    wait(.1)
+    keypress(0x31)
+    wait(.1)
+    keyrelease(0x31)
+    wait(.1)
+    keypress(0x32)
+    wait(.1)
+    keyrelease(0x32)
+    wait(.1)
+    keypress(0x33)
+    wait(.1)
+    keyrelease(0x33)
+    wait(.1)
+    keypress(0x34)
+    wait(.1)
+    keyrelease(0x34)
+    wait(.1)
+    end
+  end
+elseif game.PlaceId == 5411459567 then
+local ts = game:GetService("TeleportService")
+local p = game:GetService("Players").LocalPlayer
+ts:Teleport(1458767429, p)
+end
+end
+
+function PlayerDetect()
+   if #Players  < MinPlayerCount then
+       for i = 1,#json.data do
+           if json.data[i].id ~= game.JobId then
+               if json.data[i].maxPlayers ~= json.data[i].playing then
+                   if json.data[i].playing > MinPlayerCount then
+                   print(#Players)
+                   game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, json.data[math.random(1, #json.data)].id)
+                   end
+               end
+           end
+       end
+   end
+end
+
+PlayerDetect()
+
+game.Players.PlayerAdded:Connect(function()
+   PlayerDetect()
+end)
+
+game.Players.PlayerRemoving:Connect(function()
+   PlayerDetect()
+end)
+
+AbaScript()
