@@ -1,0 +1,46 @@
+local Players = game.Players:GetPlayers()
+local toggled = true
+local plr = game.Players.LocalPlayer
+local toggled = true
+
+-- Script for main, to grip every 2 seconds.
+
+game.StarterGui:SetCore("SendNotification", {
+Title = "Klorox Grip"; -- the title (ofc)
+Text = "On; Press X to toggle."; -- what the text says (ofc)
+Duration = 5; -- how long the notification should in secounds
+})
+	warn("auto on, x to toggle")
+
+	game.Players.LocalPlayer:GetMouse().KeyDown:Connect(function(key)
+		if key == "x" then
+			toggled = not toggled
+			if toggled then
+			    game.StarterGui:SetCore("SendNotification", {
+Title = "Klorox Grip"; -- the title (ofc)
+Text = "On"; -- what the text says (ofc)
+Duration = 5; -- how long the notification should in secounds
+})
+else
+    game.StarterGui:SetCore("SendNotification", {
+Title = "Klorox Grip"; -- the title (ofc)
+Text = "Off"; -- what the text says (ofc)
+Duration = 5; -- how long the notification should in secounds
+})
+end
+end
+end)
+
+while wait() do
+    if toggled then
+        game:GetService("Players").LocalPlayer.Backpack.CombatClient.Grip:FireServer()
+        wait(1)
+    end
+end
+
+local vu = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+   wait(1)
+   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
