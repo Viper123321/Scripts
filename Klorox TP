@@ -9,12 +9,13 @@ Title = "Klorox Tp"; -- the title (ofc)
 Text = "On; Press X to toggle."; -- what the text says (ofc)
 Duration = 5; -- how long the notification should in secounds
 })
+	warn("auto on, x to toggle")
 
-    game.Players.LocalPlayer:GetMouse().KeyDown:Connect(function(key)
-        if key == "x" then
-            toggled = not toggled
-            if toggled then
-                game.StarterGui:SetCore("SendNotification", {
+	game.Players.LocalPlayer:GetMouse().KeyDown:Connect(function(key)
+		if key == "x" then
+			toggled = not toggled
+			if toggled then
+			    game.StarterGui:SetCore("SendNotification", {
 Title = "Klorox Tp"; -- the title (ofc)
 Text = "On"; -- what the text says (ofc)
 Duration = 5; -- how long the notification should in secounds
@@ -29,15 +30,20 @@ end
 end
 end)
 
-
 function tpme()
     if toggled then
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").TeleportPad.CFrame
         wait(.8)
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").LivingThings[_G.MainUser].HumanoidRootPart.CFrame
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").LivingThings[_G.MainUser].HumanoidRootPart.CFrame * CFrame.new(0, 0, -3)
+        wait(.2)
         game:GetService("ReplicatedStorage").SelfHarm:FireServer(1000)
-        wait(.5)
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").LivingThings[_G.MainUser].HumanoidRootPart.CFrame
+        wait(1)
+        for var=1,3 do
+            wait(.1)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").LivingThings[_G.MainUser].HumanoidRootPart.CFrame * CFrame.new(0, 0, -3)
+        end
+        wait(2)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").LivingThings[_G.MainUser].HumanoidRootPart.CFrame * CFrame.new(0, 0, -3)
     end
 end
 
