@@ -44,6 +44,8 @@ function tpme()
         end
         wait(2)
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").LivingThings[_G.MainUser].HumanoidRootPart.CFrame * CFrame.new(0, 0, -3)
+	wait(1)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").LivingThings[_G.MainUser].HumanoidRootPart.CFrame * CFrame.new(0, 0, -3)
     end
 end
 
