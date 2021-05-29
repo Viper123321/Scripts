@@ -113,6 +113,8 @@ local H = Y.TextField({
 
 local function TpFarm()
     firetouchinterest(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,game:GetService("Workspace").TeleportPad,0)
+    wait(0.1)
+    firetouchinterest(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,game:GetService("Workspace").TeleportPad,0)
     wait(0.2)
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").LivingThings[_G.MainUser].HumanoidRootPart.CFrame * CFrame.new(0, 0, -3)
     game:GetService("ReplicatedStorage").SelfHarm:FireServer(10000)
