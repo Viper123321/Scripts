@@ -16,19 +16,38 @@ local Z = X.New({
 	Title = "Extra"
 })
 
-local Reload = Z.Button({
-    Text = 'Reload Script',
-    Callback = function()
-        
-        end;
-})
 local Reset = Z.Button({
     Text = 'Reset',
     Callback = function()
         game.Players.LocalPlayer.Character:BreakJoints()
         end;
 })
+local Arena = Z.Button({
+    Text = 'Go to Arena',
+    Callback = function()
+        firetouchinterest(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,game:GetService("Workspace").TeleportPad,0)
+    end;
+})
+local Hub = Z.Button({
+    Text = 'Go to Spawn',
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3289,1023,3688)
+    end;
+})
 
+local Reload = Z.Button({
+    Text = 'Reload Script',
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Viper123321/Scripts/main/KloroxGUI"))()
+        end;
+})
+
+local Reload = Z.Button({
+    Text = 'Reload Script',
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+        end;
+})
 
 local A = Y.Button({
     Text = "Knock Self",
