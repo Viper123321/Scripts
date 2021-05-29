@@ -26,6 +26,8 @@ local Arena = Z.Button({
     Text = 'Go to Arena',
     Callback = function()
         firetouchinterest(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,game:GetService("Workspace").TeleportPad,0)
+	wait(.1)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3334,1258,-7421)
     end;
 })
 local Hub = Z.Button({
