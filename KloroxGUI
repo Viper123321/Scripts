@@ -43,7 +43,7 @@ local Reload = Z.Button({
 })
 
 local Reload = Z.Button({
-    Text = 'Reload Script',
+    Text = 'Infinite Yield',
     Callback = function()
         loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
         end;
