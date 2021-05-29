@@ -151,7 +151,7 @@ if ToggleHeal then
     fireclickdetector(game:GetService("Workspace").HealthPad.ClickDetector)
 end
 if ToggleGrip then
-    wait(0.55)
+    wait(0.2)
     game:GetService("Players").LocalPlayer.Backpack.CombatClient.Grip:FireServer()
 end
 end
