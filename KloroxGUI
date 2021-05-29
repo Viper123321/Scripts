@@ -77,11 +77,12 @@ local TP2 = Y.Button({
     Text = "Start TP",
     Callback = function()
         TpFarm()
+	print('010')
     end;
     	Menu = {
         	Information = function(self)
            	 X.Banner({
-             	   Text = ' Instructions: Enter the desired player to give grips to in the "Player Name" , ( or just set the username at the start of the script before you execute ), then turn on Auto-TP, the click Start TP (on your alt). For your main, just execute the script and turn on auto-grip."'
+             	   Text = ' Instructions: Enter the desired player to give grips to in the "Player Name" , ( or just set the username at the start of the script before you execute ), then turn on Auto-TP, the click Start TP (on your alt). For your main, just execute the script and turn on auto-grip. You may need to reset.'
           	  })
       	  end
     }
@@ -112,6 +113,9 @@ local H = Y.TextField({
 })
 
 local function TpFarm()
+    wait(0.3)
+    firetouchinterest(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,game:GetService("Workspace").TeleportPad,0)
+    wait(0.1)
     firetouchinterest(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,game:GetService("Workspace").TeleportPad,0)
     wait(0.1)
     firetouchinterest(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,game:GetService("Workspace").TeleportPad,0)
@@ -142,11 +146,11 @@ end)
 
 while wait(.05) do
 if ToggleHeal then
-        fireclickdetector(game:GetService("Workspace").HealthPad.ClickDetector)
-        wait(.1)
+    wait(.1)
+    fireclickdetector(game:GetService("Workspace").HealthPad.ClickDetector)
 end
 if ToggleGrip then
-    game:GetService("Players").LocalPlayer.Backpack.CombatClient.Grip:FireServer()
     wait(0.35)
+    game:GetService("Players").LocalPlayer.Backpack.CombatClient.Grip:FireServer()
 end
 end
