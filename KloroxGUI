@@ -124,7 +124,8 @@ local function TpFarm()
     game:GetService("ReplicatedStorage").SelfHarm:FireServer(10000)
     wait(0.9)
     for var=1,45 do
-       wait(.1)
+      wait(.1)
+      firetouchinterest(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,game:GetService("Workspace").TeleportPad,0)
       game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").LivingThings[_G.MainUser].HumanoidRootPart.CFrame * CFrame.new(0, -2, -2)
       game:GetService("ReplicatedStorage").SelfHarm:FireServer(10000)
     end
