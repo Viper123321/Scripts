@@ -2,104 +2,50 @@ local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinl
 
 local X = Material.Load({
 	Title = "Klorox Farm",
-	Style = 3,
-	SizeX = 200,
-	SizeY = 305,
+	Style = 1,
+	SizeX = 230,
+	SizeY = 255,
 	Theme = "Dark",
+	 ColorOverrides = {
+	Minimise = Color3.fromRGB(212,53,53),
+	}
 })
 
+-- _____________ Pages _____________
+
 local Y = X.New({
-	Title = "Main"
+	Title = "Farm"
+})
+
+local MM = X.New({
+	Title = "Self"
+})
+
+local TL = X.New({
+	Title = "Teleports"
 })
 
 local Z = X.New({
 	Title = "Extra"
 })
 
-local Reset = Z.Button({
-    Text = 'Reset',
-    Callback = function()
-        game.Players.LocalPlayer.Character:BreakJoints()
-        end;
-})
-local Arena = Z.Button({
-    Text = 'Go to Arena',
-    Callback = function()
-        firetouchinterest(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,game:GetService("Workspace").TeleportPad,0)
-	wait(.1)
-	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3334,1258,-7421)
-    end;
-})
-local Hub = Z.Button({
-    Text = 'Go to Spawn',
-    Callback = function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3289,1023,3688)
-    end;
-})
-
-local Reload = Z.Button({
-    Text = 'Reload Script',
-    Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/Viper123321/Scripts/main/KloroxGUI"))()
-        end;
-})
-
-local Reload = Z.Button({
-    Text = 'Infinite Yield',
-    Callback = function()
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
-        end;
-})
-
-local A = Y.Button({
-    Text = "Knock Self",
-    Callback = function()
-        game:GetService("ReplicatedStorage").SelfHarm:FireServer(10000)
-    end
-})
-
-local HealB = Y.Button({
-    Text = "Heal",
-    Callback = function()
-        fireclickdetector(game:GetService("Workspace").HealthPad.ClickDetector)
-    end
-})
+-- _____________ Farm _____________
 
 local TP = Y.Toggle({
     Text = "Auto-TP",
     Callback = function(Value)
         ToggleTP = Value
+        if ToggleTP then
+            game.Players.LocalPlayer.Character:BreakJoints()
+        end
     end,
     Enabled = false
-})
-
-local TP2 = Y.Button({
-    Text = "Start TP",
-    Callback = function()
-        TpFarm()
-	print('010')
-    end;
-    	Menu = {
-        	Information = function(self)
-           	 X.Banner({
-             	   Text = ' Instructions: Enter the desired player to give grips to in the "Player Name" , ( or just set the username at the start of the script before you execute ), then turn on Auto-TP, the click Start TP (on your alt). For your main, just execute the script and turn on auto-grip. You may need to reset.'
-          	  })
-      	  end
-    }
 })
 
 local GRP = Y.Toggle({
     Text = "Auto-Grip",
     Callback = function(Value)
         ToggleGrip = Value
-    end,
-    Enabled = false
-})
-
-local LoopH = Y.Toggle({
-    Text = "Loop Heal",
-    Callback = function(Value)
-        ToggleHeal = Value
     end,
     Enabled = false
 })
@@ -111,6 +57,117 @@ local H = Y.TextField({
 		print(_G.MainUser)
 	end,
 })
+
+-- _____________ Self _____________
+
+local A = MM.Button({
+    Text = "Knock Self",
+    Callback = function()
+        game:GetService("ReplicatedStorage").SelfHarm:FireServer(10000)
+    end
+})
+
+local HealB = MM.Button({
+    Text = "Heal",
+    Callback = function()
+        fireclickdetector(game:GetService("Workspace").HealthPad.ClickDetector)
+    end
+})
+
+local Reset = MM.Button({
+    Text = 'Reset',
+    Callback = function()
+        game.Players.LocalPlayer.Character:BreakJoints()
+        end;
+})
+
+local LoopH = MM.Toggle({
+    Text = "God Mode",
+    Callback = function(Value)
+        ToggleHeal = Value
+    end,
+    Enabled = false
+})
+
+local InfK = MM.Toggle({
+    Text = 'Infinite Kunai',
+    Callback = function(Value)
+        ToggleKunai = Value
+    end,
+    Enabled = false
+})
+
+-- _____________ Teleports _____________
+
+local Arena = TL.Button({
+    Text = 'Arena',
+    Callback = function()
+        firetouchinterest(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,game:GetService("Workspace").TeleportPad,0)
+	wait(.1)
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3334,1258,-7421)
+    end;
+})
+local Hub = TL.Button({
+    Text = 'Spawn',
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3289,1023,3688)
+    end;
+})
+
+local Lake = TL.Button({
+    Text = 'Lake',
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3336, 1180, -7104)
+    end;
+})
+
+local Box = TL.Button({
+    Text = 'Box',
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(741, 1351, 10774)
+    end;
+})
+
+
+-- _____________ Extras _____________
+
+local Reload = Z.Button({
+    Text = 'Reload Script',
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Viper123321/Scripts/main/KloroxGUI"))()
+        end;
+})
+
+local IY = Z.Button({
+    Text = 'Infinite Yield',
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+        end;
+})
+
+local ESP = Z.Button({
+    Text = 'Unnamed ESP',
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/ic3w0lf22/Unnamed-ESP/master/UnnamedESP.lua'))()
+        end;
+})
+
+local Dex = Z.Button({
+    Text = 'Dark Dex',
+    Callback = function()
+        loadstring(game:HttpGetAsync("https://pastebin.com/raw/fPP8bZ8Z"))()
+        end;
+})
+
+local Spy = Z.Button({
+    Text = 'Remote Spy',
+    Callback = function()
+        loadstring(game:HttpGet("https://github.com/exxtremestuffs/SimpleSpySource/raw/master/SimpleSpy.lua"))()
+        end;
+})
+
+-- _____________ Functions _____________
+
 
 local function TpFarm()
     wait(0.3)
@@ -145,7 +202,13 @@ game:GetService("Players").LocalPlayer.Idled:connect(function()
    vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 end)
 
+-- _____________ While Loop _____________
+
 while wait(.05) do
+if ToggleKunai then
+    wait(.1)
+    fireclickdetector(game:GetService("Workspace").KunaiPad.ClickDetector)
+end
 if ToggleHeal then
     wait(.1)
     fireclickdetector(game:GetService("Workspace").HealthPad.ClickDetector)
