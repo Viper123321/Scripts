@@ -87,14 +87,13 @@ local function YourScript()
 end
 
 function PlayerDetect()
+   local Players = game.Players:GetPlayers()
    if #Players  < MinPlayerCount then
        for i = 1,#json.data do
            if json.data[i].id ~= game.JobId then
                if json.data[i].maxPlayers ~= json.data[i].playing then
-                   if json.data[i].playing > MinPlayerCount then
-                   print(#Players)
                    game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, json.data[math.random(1, #json.data)].id)
-                   end
+		   print(#Players)
                end
            end
        end
