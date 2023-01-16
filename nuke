@@ -194,8 +194,8 @@ end)
 
 while wait(.05) do
 if autocoin then
-    wait(3)
     loadstring(game:HttpGet('https://raw.githubusercontent.com/Viper123321/Scripts/main/PATHstuff'))()
+    wait(15)
 end
 
 end
