@@ -2,11 +2,18 @@ local PathfindingService = game:GetService("PathfindingService")
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 
-local path = PathfindingService:CreatePath()
+local path = PathfindingService:CreatePath({
+	AgentRadius = 3,
+	AgentHeight = 6,
+	AgentCanJump = true,
+	AgentCanClimb = true,
+	WaypointSpacing = 6
+})
 
 local player = Players.LocalPlayer
 local character = player.Character
 local humanoid = character:WaitForChild("Humanoid")
+
 if game:GetService("Workspace").CurrencyDrops.MoonCoin1 then
     x = game:GetService("Workspace").CurrencyDrops.MoonCoin1.CFrame.x
     y = game:GetService("Workspace").CurrencyDrops.MoonCoin1.CFrame.y
