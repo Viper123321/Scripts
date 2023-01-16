@@ -1,0 +1,276 @@
+print('V1.2')
+
+local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/MaterialLua/master/Module.lua"))()
+
+local X = Material.Load({
+	Title = "Nuke Sim",
+	Style = 1,
+	SizeX = 230,
+	SizeY = 255,
+	Theme = "Dark",
+	 ColorOverrides = {
+	Minimise = Color3.fromRGB(212,53,53),
+	}
+})
+
+-- _____________ Pages _____________
+
+local Y = X.New({
+	Title = "Farm"
+})
+
+local MM = X.New({
+	Title = "Self"
+})
+
+local TL = X.New({
+	Title = "Teleports"
+})
+
+local Z = X.New({
+	Title = "Extra"
+})
+
+-- _____________ Farm _____________
+
+local l1 = Y.Button({
+    Text = 'Lunar 1',
+    Callback = function()
+        local args = {
+            [1] = "Lunar 1"
+        }
+        game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Buy:InvokeServer(unpack(args))
+
+        end;
+})
+
+local l2 = Y.Button({
+    Text = 'Lunar 2',
+    Callback = function()
+        local args = {
+            [1] = "Lunar 2"
+        }
+        game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Buy:InvokeServer(unpack(args))
+
+        end;
+})
+
+local l3 = Y.Button({
+    Text = 'Lunar 3',
+    Callback = function()
+        local args = {
+            [1] = "Lunar 3"
+        }
+        game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Buy:InvokeServer(unpack(args))
+
+        end;
+})
+
+local l4 = Y.Button({
+    Text = 'Lunar 4',
+    Callback = function()
+        local args = {
+            [1] = "Lunar 4"
+        }
+        game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Buy:InvokeServer(unpack(args))
+
+        end;
+})
+
+local l5 = Y.Button({
+    Text = 'Lunar 5',
+    Callback = function()
+        local args = {
+            [1] = "Lunar 5"
+        }
+        game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Buy:InvokeServer(unpack(args))
+
+        end;
+})
+
+local l6 = Y.Button({
+    Text = 'Lunar 6',
+    Callback = function()
+        local args = {
+            [1] = "Lunar 6"
+        }
+        game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Buy:InvokeServer(unpack(args))
+
+        end;
+})
+
+
+
+
+
+local drop1 = Y.Dropdown({
+    Text = "Egg for Auto Open",
+	Callback = function(Value)
+		egg = Value
+	end,
+	Options = {
+		"Lunar 1",
+		"Lunar 2",
+		"Lunar 3",
+		"Lunar 4",
+		"Lunar 5",
+		"Lunar 6"
+	},
+})
+
+local autocointoggle = Y.Toggle({
+	Text = "Auto Pickup Coins",
+	Callback = function(Value)
+		autocoin = Value
+	end,
+	Enabled = false
+})
+-- _____________ Self _____________
+
+
+local Reset = MM.Button({
+    Text = 'Reset',
+    Callback = function()
+        game.Players.LocalPlayer.Character:BreakJoints()
+        end;
+})
+
+
+
+
+
+-- _____________ Teleports _____________
+
+
+-- _____________ Extras _____________
+
+--local Reload = Z.Button({
+--    Text = 'Reload Script',
+--    Callback = function()
+--        loadstring(game:HttpGet("https://raw.githubusercontent.com/Viper123321/Scripts/main/KloroxGUI"))()
+--        end;
+--})
+
+local IY = Z.Button({
+    Text = 'Infinite Yield',
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+        end;
+})
+
+local ESP = Z.Button({
+    Text = 'Unnamed ESP',
+    Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/ic3w0lf22/Unnamed-ESP/master/UnnamedESP.lua'))()
+        end;
+})
+
+local Dex = Z.Button({
+    Text = 'Dark Dex',
+    Callback = function()
+        loadstring(game:HttpGetAsync("https://pastebin.com/raw/fPP8bZ8Z"))()
+        end;
+})
+
+local Spy = Z.Button({
+    Text = 'Remote Spy',
+    Callback = function()
+        loadstring(game:HttpGet("https://github.com/exxtremestuffs/SimpleSpySource/raw/master/SimpleSpy.lua"))()
+        end;
+})
+
+-- _____________ Functions _____________
+
+local PathfindingService = game:GetService("PathfindingService")
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+local path = PathfindingService:CreatePath()
+
+local player = Players.LocalPlayer
+local character = player.Character
+local humanoid = character:WaitForChild("Humanoid")
+
+local TEST_DESTINATION = Vector3.new(x, y, z)
+
+local waypoints
+local nextWaypointIndex
+local reachedConnection
+local blockedConnection
+
+local function followPath(destination)
+	-- Compute the path
+	local success, errorMessage = pcall(function()
+		path:ComputeAsync(character.PrimaryPart.Position, destination)
+	end)
+
+	if success and path.Status == Enum.PathStatus.Success then
+		-- Get the path waypoints
+		waypoints = path:GetWaypoints()
+
+		-- Detect if path becomes blocked
+		blockedConnection = path.Blocked:Connect(function(blockedWaypointIndex)
+			-- Check if the obstacle is further down the path
+			if blockedWaypointIndex >= nextWaypointIndex then
+				-- Stop detecting path blockage until path is re-computed
+				blockedConnection:Disconnect()
+				-- Call function to re-compute new path
+				followPath(destination)
+			end
+		end)
+
+		-- Detect when movement to next waypoint is complete
+		if not reachedConnection then
+			reachedConnection = humanoid.MoveToFinished:Connect(function(reached)
+				if reached and nextWaypointIndex < #waypoints then
+					-- Increase waypoint index and move to next waypoint
+					nextWaypointIndex = nextWaypointIndex + 1
+					humanoid:MoveTo(waypoints[nextWaypointIndex].Position)
+				else
+					reachedConnection:Disconnect()
+					blockedConnection:Disconnect()
+				end
+			end)
+		end
+
+		-- Initially move to second waypoint (first waypoint is path start; skip it)
+		nextWaypointIndex = 2
+		humanoid:MoveTo(waypoints[nextWaypointIndex].Position)
+	else
+		warn("Path not computed!", errorMessage)
+	end
+end
+
+x = game:GetService("Workspace").CurrencyDrops.MoonCoin1.CFrame.x
+y = game:GetService("Workspace").CurrencyDrops.MoonCoin1.CFrame.y
+z = game:GetService("Workspace").CurrencyDrops.MoonCoin1.CFrame.z
+
+local vu = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+   wait(1)
+   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+
+local l7 = Y.Button({
+    Text = 'Coin',
+    Callback = function()
+        x = game:GetService("Workspace").CurrencyDrops.MoonCoin1.CFrame.x
+        y = game:GetService("Workspace").CurrencyDrops.MoonCoin1.CFrame.y
+        z = game:GetService("Workspace").CurrencyDrops.MoonCoin1.CFrame.z
+        followPath(TEST_DESTINATION)
+    end;
+})
+
+
+-- _____________ While Loop _____________
+
+
+
+while wait(.05) do
+if autocoin then
+    wait(3)
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/Viper123321/Scripts/main/PATHstuff'))()
+end
+
+end
