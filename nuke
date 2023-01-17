@@ -112,7 +112,7 @@ local autocointoggle = Y.Toggle({
 			while autocoin do
         			loadstring(game:HttpGet('https://raw.githubusercontent.com/Viper123321/Scripts/main/PATHstuff'))()
 				print("getcoin")
-        			wait(10)
+        			wait(20)
 				end
 		end
 	end,
