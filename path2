@@ -1,0 +1,77 @@
+while wait(15) do
+local PathfindingService = game:GetService("PathfindingService")
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+
+local path = PathfindingService:CreatePath({
+	AgentRadius = 3,
+	AgentHeight = 6,
+	AgentCanJump = true,
+	AgentCanClimb = true,
+	WaypointSpacing = 1
+})
+
+local player = Players.LocalPlayer
+local character = player.Character
+local humanoid = character:WaitForChild("Humanoid")
+
+if game:GetService("Workspace").CurrencyDrops.MoonCoin1 then
+    x = game:GetService("Workspace").CurrencyDrops.MoonCoin1.CFrame.x
+    y = game:GetService("Workspace").CurrencyDrops.MoonCoin1.CFrame.y
+    z = game:GetService("Workspace").CurrencyDrops.MoonCoin1.CFrame.z
+end
+local TEST_DESTINATION = Vector3.new(x, y, z)
+
+
+--local TEST_DESTINATION = Vector3.new(3722.97632, 851.376526, 3253.39868, 0.0103632528, 0.657711804, 0.753198385, 0.999821305, 0.00509532075, -0.0182058997, -0.0158120226, 0.753252387, -0.657541454)
+
+local waypoints
+local nextWaypointIndex
+local reachedConnection
+local blockedConnection
+
+local function followPath(destination)
+	-- Compute the path
+	local success, errorMessage = pcall(function()
+		path:ComputeAsync(character.PrimaryPart.Position, destination)
+	end)
+
+	if success and path.Status == Enum.PathStatus.Success then
+		-- Get the path waypoints
+		waypoints = path:GetWaypoints()
+
+		-- Detect if path becomes blocked
+		blockedConnection = path.Blocked:Connect(function(blockedWaypointIndex)
+			-- Check if the obstacle is further down the path
+			if blockedWaypointIndex >= nextWaypointIndex then
+				-- Stop detecting path blockage until path is re-computed
+				blockedConnection:Disconnect()
+				-- Call function to re-compute new path
+				followPath(destination)
+			end
+		end)
+
+		-- Detect when movement to next waypoint is complete
+		if not reachedConnection then
+			reachedConnection = humanoid.MoveToFinished:Connect(function(reached)
+				if reached and nextWaypointIndex < #waypoints then
+					-- Increase waypoint index and move to next waypoint
+					nextWaypointIndex = nextWaypointIndex + 1
+					humanoid:MoveTo(waypoints[nextWaypointIndex].Position)
+				else
+					reachedConnection:Disconnect()
+					blockedConnection:Disconnect()
+				end
+			end)
+		end
+
+		-- Initially move to second waypoint (first waypoint is path start; skip it)
+		nextWaypointIndex = 2
+		humanoid:MoveTo(waypoints[nextWaypointIndex].Position)
+	else
+		warn("Path not computed!", errorMessage)
+	end
+end
+
+followPath(TEST_DESTINATION)
+end
