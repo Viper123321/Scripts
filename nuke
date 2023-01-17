@@ -1,5 +1,4 @@
-print('V1.2')
-
+print('Nuke Sim by Viper123321')
 local Material = loadstring(game:HttpGet("https://raw.githubusercontent.com/Kinlei/MaterialLua/master/Module.lua"))()
 
 local X = Material.Load({
@@ -16,11 +15,11 @@ local X = Material.Load({
 -- _____________ Pages _____________
 
 local Y = X.New({
-	Title = "Farm"
+	Title = "Main"
 })
 
 local MM = X.New({
-	Title = "Self"
+	Title = "Player"
 })
 
 local TL = X.New({
@@ -36,77 +35,49 @@ local Z = X.New({
 local l1 = Y.Button({
     Text = 'Lunar 1',
     Callback = function()
-        local args = {
-            [1] = "Lunar 1"
-        }
-        game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Buy:InvokeServer(unpack(args))
-
+        game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Buy:InvokeServer("Lunar 1")
         end;
 })
 
 local l2 = Y.Button({
     Text = 'Lunar 2',
     Callback = function()
-        local args = {
-            [1] = "Lunar 2"
-        }
-        game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Buy:InvokeServer(unpack(args))
-
+            game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Buy:InvokeServer("Lunar 2")
         end;
 })
 
 local l3 = Y.Button({
     Text = 'Lunar 3',
     Callback = function()
-        local args = {
-            [1] = "Lunar 3"
-        }
-        game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Buy:InvokeServer(unpack(args))
-
+            game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Buy:InvokeServer("Lunar 3")
         end;
 })
 
 local l4 = Y.Button({
     Text = 'Lunar 4',
     Callback = function()
-        local args = {
-            [1] = "Lunar 4"
-        }
-        game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Buy:InvokeServer(unpack(args))
-
+            game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Buy:InvokeServer("Lunar 4")
         end;
 })
 
 local l5 = Y.Button({
     Text = 'Lunar 5',
     Callback = function()
-        local args = {
-            [1] = "Lunar 5"
-        }
-        game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Buy:InvokeServer(unpack(args))
-
+            game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Buy:InvokeServer("Lunar 5")
         end;
 })
 
 local l6 = Y.Button({
     Text = 'Lunar 6',
     Callback = function()
-        local args = {
-            [1] = "Lunar 6"
-        }
-        game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Buy:InvokeServer(unpack(args))
-
+            game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Buy:InvokeServer("Lunar 6")
         end;
 })
 
-
-
-
-
 local drop1 = Y.Dropdown({
-    Text = "Egg for Auto Open",
+    Text = "Egg Type: ",
 	Callback = function(Value)
-		egg = Value
+		eggtype = Value
 	end,
 	Options = {
 		"Lunar 1",
@@ -118,15 +89,32 @@ local drop1 = Y.Dropdown({
 	},
 })
 
+local autoeggtoggle = Y.Toggle({
+	Text = "Auto Egg",
+	Callback = function(Value)
+		autoegg = Value
+		if autoegg then
+		    while autoegg do
+                game:GetService("ReplicatedStorage").Packages._Index:FindFirstChild("sleitnick_knit@1.4.7").knit.Services.EggService.RF.Buy:InvokeServer(eggtype)
+            wait(1)
+        end
+end
+	end,
+	Enabled = false
+})
+
 local autocointoggle = Y.Toggle({
 	Text = "Auto Pickup Coins",
 	Callback = function(Value)
 		autocoin = Value
+		if autocoin then
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/Viper123321/Scripts/main/PATHstuff'))()
+        wait(15)
+end
 	end,
 	Enabled = false
 })
 -- _____________ Self _____________
-
 
 local Reset = MM.Button({
     Text = 'Reset',
@@ -135,12 +123,7 @@ local Reset = MM.Button({
         end;
 })
 
-
-
-
-
 -- _____________ Teleports _____________
-
 
 -- _____________ Extras _____________
 
@@ -190,12 +173,6 @@ end)
 
 -- _____________ While Loop _____________
 
+--[[while wait(.05) do
 
-
-while wait(.05) do
-if autocoin then
-    loadstring(game:HttpGet('https://raw.githubusercontent.com/Viper123321/Scripts/main/PATHstuff'))()
-    wait(15)
-end
-
-end
+end]]
