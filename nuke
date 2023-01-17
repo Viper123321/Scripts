@@ -108,8 +108,10 @@ local autocointoggle = Y.Toggle({
 	Callback = function(Value)
 		autocoin = Value
 		if autocoin then
+			while autoegg do
         loadstring(game:HttpGet('https://raw.githubusercontent.com/Viper123321/Scripts/main/PATHstuff'))()
-        wait(15)
+        wait(10)
+	end
 end
 	end,
 	Enabled = false
