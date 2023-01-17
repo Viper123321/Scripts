@@ -110,10 +110,11 @@ local autocointoggle = Y.Toggle({
 		autocoin = Value
 		if autocoin then
 			while autoegg do
-        loadstring(game:HttpGet('https://raw.githubusercontent.com/Viper123321/Scripts/main/PATHstuff'))()
-        wait(10)
-	end
-end
+        			loadstring(game:HttpGet('https://raw.githubusercontent.com/Viper123321/Scripts/main/PATHstuff'))()
+				print("getcoin")
+        			wait(10)
+				end
+		end
 	end,
 	Enabled = false
 })
